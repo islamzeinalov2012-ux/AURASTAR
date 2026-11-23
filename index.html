@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b20">
+<title>AURA STAR — Beyond the Future</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --bg:#080b20;
+ --panel:#101632;
+ --blue:#3988ff;
+ --purple:#8b5cf6;
+ --text:#f4f5ff;
+ --muted:#aab2d0;
+}
+body{
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial,Helvetica,sans-serif;
+ overflow-x:hidden;
+ line-height:1.65;
+}
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ background:
+ radial-gradient(ellipse at 15% 10%,#243b8a55,transparent 40%),
+ radial-gradient(ellipse at 85% 40%,#7025a844,transparent 40%),
+ linear-gradient(150deg,#080b20,#10102b 60%,#080b20);
+}
+a{color:inherit;text-decoration:none}
+button,select{font:inherit}
+button{cursor:pointer}
+.container{width:min(1180px,92%);margin:auto}
+
+/* HEADER */
+header{
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:#080b20ed;
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid #ffffff12;
+}
+.nav{
+ min-height:78px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+}
+.brand{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ font-size:23px;
+ font-weight:900;
+ letter-spacing:3px;
+ white-space:nowrap;
+}
+.logo{
+ width:43px;height:43px;
+ filter:drop-shadow(0 0 12px #548dff99);
+}
+.brand span{color:#78a7ff}
+.navlinks{
+ display:flex;
+ align-items:center;
+ gap:23px;
+}
+.navlinks a{
+ font-size:13px;
+ color:#c9cce4;
+ transition:.2s;
+}
+.navlinks a:hover{color:#83aaff}
+.controls{display:flex;align-items:center;gap:12px}
+#language{
+ background:#151b3b;
+ color:white;
+ border:1px solid #5667a5;
+ padding:10px;
+ border-radius:10px;
+ max-width:145px;
+}
+.menu-btn{
+ display:none;
+ background:#202957;
+ color:white;
+ border:0;
+ border-radius:10px;
+ padding:10px 14px;
+ font-size:20px;
+}
+.mobile-menu{
+ display:none;
+ position:fixed;
+ z-index:150;
+ top:78px;
+ left:0;right:0;
+ padding:22px;
+ background:#0d1230;
+ border-bottom:1px solid #5266b9;
+ box-shadow:0 20px 50px #0009;
+}
+.mobile-menu.open{display:grid;gap:15px}
+.mobile-menu a{
+ padding:12px;
+ border-radius:9px;
+ background:#ffffff08;
+}
+.close-menu{
+ position:absolute;
+ right:20px;
+ top:15px;
+ border:0;
+ background:transparent;
+ color:white;
+ font-size:24px;
+}
+
+/* GENERAL */
+section{padding:90px 0;scroll-margin-top:90px}
+.section-title{
+ font-size:clamp(29px,5vw,43px);
+ margin-bottom:14px;
+ line-height:1.2;
+}
+.section-desc{
+ color:var(--muted);
+ max-width:750px;
+ margin-bottom:35px;
+}
+.gradient{
+ background:linear-gradient(90deg,#55a5ff,#ae7aff);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+}
+.card{
+ background:linear-gradient(145deg,#18234bba,#10142dbb);
+ border:1px solid #829aff20;
+ border-radius:19px;
+ padding:27px;
+ transition:.25s;
+}
+.card:hover{
+ transform:translateY(-5px);
+ border-color:#7599ff88;
+ box-shadow:0 15px 40px #244caa22;
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:20px;
+}
+.card-icon{
+ font-size:34px;
+ margin-bottom:14px;
+}
+.card h3{font-size:21px;margin-bottom:12px}
+.card p{color:var(--muted);font-size:14px}
+.tag{
+ display:inline-block;
+ margin-top:18px;
+ padding:6px 12px;
+ border-radius:20px;
+ background:#4269d52c;
+ color:#9bbcff;
+ font-size:12px;
+}
+
+/* HERO */
+.hero{
+ min-height:650px;
+ display:flex;
+ align-items:center;
+ padding:95px 0;
+}
+.hero-content{max-width:850px}
+.eyebrow{
+ color:#8cb3ff;
+ letter-spacing:4px;
+ font-size:12px;
+ font-weight:bold;
+ margin-bottom:23px;
+}
+.hero h1{
+ font-size:clamp(48px,8vw,90px);
+ line-height:1.08;
+ letter-spacing:-3px;
+ margin-bottom:25px;
+}
+.hero p{
+ color:#b6bedc;
+ font-size:18px;
+ max-width:680px;
+ margin-bottom:32px;
+}
+.buttons{display:flex;flex-wrap:wrap;gap:13px}
+.btn{
+ display:inline-flex;
+ justify-content:center;
+ align-items:center;
+ border:1px solid #698cff66;
+ padding:13px 23px;
+ border-radius:11px;
+ color:white;
+ background:linear-gradient(110deg,#286de5,#7545cf);
+ font-weight:bold;
+}
+.btn.secondary{background:#ffffff0b}
+.hero-decoration{
+ position:absolute;
+ right:7%;
+ top:190px;
+ width:180px;
+ height:180px;
+ border:1px solid #739bff55;
+ border-radius:50%;
+ box-shadow:0 0 60px #516dff44,inset 0 0 60px #516dff22;
+}
+.hero-decoration:before{
+ content:"";
+ position:absolute;
+ inset:22px;
+ border:1px solid #a17aff88;
+ border-radius:50%;
+}
+.hero-decoration:after{
+ content:"✦";
+ position:absolute;
+ inset:0;
+ display:grid;
+ place-items:center;
+ font-size:80px;
+ color:#94baff;
+ text-shadow:0 0 35px #548dff;
+}
+
+/* STATS */
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:18px;
+ margin-top:55px;
+}
+.stat{
+ padding:23px;
+ background:#ffffff08;
+ border:1px solid #ffffff13;
+ border-radius:15px;
+}
+.stat strong{font-size:30px;display:block;color:#8eb3ff}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* LARGE FEATURE */
+.feature{
+ display:grid;
+ grid-template-columns:1.1fr .9fr;
+ gap:30px;
+ align-items:center;
+}
+.feature-art{
+ min-height:330px;
+ border-radius:24px;
+ border:1px solid #718bff33;
+ background:
+ radial-gradient(circle at 50% 50%,#7b62ff55,transparent 42%),
+ linear-gradient(135deg,#162d63,#171033);
+ display:grid;
+ place-items:center;
+ font-size:110px;
+}
+
+/* NEWS */
+.news-date{font-size:12px;color:#91aaff;margin-bottom:10px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+/* CONTACT */
+.contact-box{
+ background:linear-gradient(110deg,#1c3470,#30205a);
+ padding:45px;
+ border-radius:23px;
+ border:1px solid #ffffff22;
+}
+footer{
+ padding:35px 0;
+ border-top:1px solid #ffffff15;
+ color:#929bbd;
+ font-size:13px;
+}
+.footer-inner{
+ display:flex;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:20px;
+}
+
+/* ANIMATIONS */
+@keyframes appear{
+ from{opacity:0;transform:translateY(15px)}
+ to{opacity:1;transform:translateY(0)}
+}
+section{animation:appear .5s ease both}
+
+/* RTL */
+body.rtl{direction:rtl}
+body.rtl .nav{direction:rtl}
+body.rtl .brand{letter-spacing:1px}
+body.rtl .mobile-menu{direction:rtl}
+body.rtl .close-menu{right:auto;left:20px}
+
+/* MOBILE */
+@media(max-width:900px){
+ .navlinks{display:none}
+ .menu-btn{display:block}
+ .hero-decoration{opacity:.2;right:-65px}
+ .grid,.news-grid{grid-template-columns:repeat(2,1fr)}
+ .feature{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ section{padding:65px 0}
+ .nav{min-height:70px}
+ .brand{font-size:18px}
+ .logo{width:36px;height:36px}
+ .mobile-menu{top:70px}
+ .grid,.news-grid{grid-template-columns:1fr}
+ .stats{grid-template-columns:1fr}
+ .hero{min-height:550px;padding:70px 0}
+ .hero h1{letter-spacing:-2px}
+ .hero p{font-size:16px}
+ .contact-box{padding:25px}
+ .feature-art{min-height:230px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="container nav">
+  <a href="#home" class="brand">
+   <svg class="logo" viewBox="0 0 100 100" fill="none" aria-label="AURA STAR">
+    <path d="M50 5 L62 38 L95 50 L62 62 L50 95 L38 62 L5 50 L38 38 Z"
+     fill="url(#g)" stroke="#a8caff" stroke-width="2"/>
+    <path d="M50 24 L58 44 L78 50 L58 56 L50 76 L42 56 L22 50 L42 44 Z"
+     fill="#101b45"/>
+    <circle cx="50" cy="50" r="5" fill="white"/>
+    <defs>
+     <linearGradient id="g" x1="5" y1="5" x2="95" y2="95">
+      <stop stop-color="#55b4ff"/>
+      <stop offset="1" stop-color="#9856ff"/>
+     </linearGradient>
+    </defs>
+   </svg>
+   AURA <span>STAR</span>
+  </a>
+
+  <nav class="navlinks" id="desktopNav">
+   <a href="#home" data-t="navHome"></a>
+   <a href="#about" data-t="navAbout"></a>
+   <a href="#news" data-t="navNews"></a>
+   <a href="#games" data-t="navGames"></a>
+   <a href="#charity" data-t="navCharity"></a>
+   <a href="#contact" data-t="navContact"></a>
+  </nav>
+
+  <div class="controls">
+   <select id="language" aria-label="Language">
+    <option value="ru">Русский</option>
+    <option value="en">English</option>
+    <option value="zh">中文</option>
+    <option value="es">Español</option>
+    <option value="de">Deutsch</option>
+    <option value="fr">Français</option>
+    <option value="ar">العربية</option>
+    <option value="ja">日本語</option>
+    <option value="pt">Português</option>
+    <option value="it">Italiano</option>
+   </select>
+   <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  </div>
+ </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+ <button class="close-menu" id="closeMenu" aria-label="Close">×</button>
+ <a href="#home" data-t="navHome"></a>
+ <a href="#about" data-t="navAbout"></a>
+ <a href="#news" data-t="navNews"></a>
+ <a href="#games" data-t="navGames"></a>
+ <a href="#charity" data-t="navCharity"></a>
+ <a href="#contact" data-t="navContact"></a>
+</div>
+
+<main>
+<section class="hero" id="home">
+ <div class="container hero-content">
+  <div class="eyebrow" data-t="eyebrow"></div>
+  <h1>AURA <span class="gradient">STAR</span></h1>
+  <p data-t="heroText"></p>
+  <div class="buttons">
+   <a href="#about" class="btn" data-t="explore"></a>
+   <a href="#games" class="btn secondary" data-t="discoverGames"></a>
+  </div>
+
+  <div class="stats">
+   <div class="stat">
+    <strong>∞</strong>
+    <span data-t="stat1"></span>
+   </div>
+   <div class="stat">
+    <strong>01</strong>
+    <span data-t="stat2"></span>
+   </div>
+   <div class="stat">
+    <strong>2026</strong>
+    <span data-t="stat3"></span>
+   </div>
+  </div>
+ </div>
+ <div class="hero-decoration"></div>
+</section>
+
+<section id="about">
+ <div class="container">
+  <div class="feature">
+   <div>
+    <div class="eyebrow" data-t="aboutEyebrow"></div>
+    <h2 class="section-title" data-t="aboutTitle"></h2>
+    <p class="section-desc" data-t="aboutText"></p>
+    <p class="section-desc" data-t="aboutText2"></p>
+   </div>
+   <div class="feature-art">✦</div>
+  </div>
+ </div>
+</section>
+
+<section id="news">
+ <div class="container">
+  <div class="eyebrow" data-t="newsEyebrow"></div>
+  <h2 class="section-title" data-t="newsTitle"></h2>
+  <p class="section-desc" data-t="newsDesc"></p>
+  <div class="news-grid">
+   <article class="card">
+    <div class="news-date" data-t="newsLabel"></div>
+    <h3 data-t="news1Title"></h3>
+    <p data-t="news1Text"></p>
+    <span class="tag" data-t="newsTag"></span>
+   </article>
+   <article class="card">
+    <div class="news-date" data-t="newsLabel"></div>
+    <h3 data-t="news2Title"></h3>
+    <p data-t="news2Text"></p>
+    <span class="tag" data-t="newsTag"></span>
+   </article>
+   <article class="card">
+    <div class="news-date" data-t="newsLabel"></div>
+    <h3 data-t="news3Title"></h3>
+    <p data-t="news3Text"></p>
+    <span class="tag" data-t="newsTag"></span>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section id="games">
+ <div class="container">
+  <div class="eyebrow" data-t="gamesEyebrow"></div>
+  <h2 class="section-title" data-t="gamesTitle"></h2>
+  <p class="section-desc" data-t="gamesDesc"></p>
+  <div class="grid">
+   <article class="card">
+    <div class="card-icon">🎮</div>
+    <h3 data-t="game1Title"></h3>
+    <p data-t="game1Text"></p>
+    <span class="tag" data-t="comingSoon"></span>
+   </article>
+   <article class="card">
+    <div class="card-icon">🌌</div>
+    <h3 data-t="game2Title"></h3>
+    <p data-t="game2Text"></p>
+    <span class="tag" data-t="comingSoon"></span>
+   </article>
+   <article class="card">
+    <div class="card-icon">🚀</div>
+    <h3 data-t="game3Title"></h3>
+    <p data-t="game3Text"></p>
+    <span class="tag" data-t="comingSoon"></span>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section id="charity">
+ <div class="container">
+  <div class="feature">
+   <div class="feature-art">💙</div>
+   <div>
+    <div class="eyebrow" data-t="charityEyebrow"></div>
+    <h2 class="section-title" data-t="charityTitle"></h2>
+    <p class="section-desc" data-t="charityText"></p>
+    <p class="section-desc" data-t="charityText2"></p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="container">
+  <div class="contact-box">
+   <div class="eyebrow" data-t="contactEyebrow"></div>
+   <h2 class="section-title" data-t="contactTitle"></h2>
+   <p class="section-desc" data-t="contactText"></p>
+   <a href="mailto:contact@aurastar.example" class="btn" data-t="contactButton"></a>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer-inner">
+  <div>© 2026 AURA STAR</div>
+  <div data-t="footerText"></div>
+  <div>Beyond the Future ✦</div>
+ </div>
+</footer>
+
+<script>
+const translations = {
+ru:{
+ navHome:"Главная",navAbout:"О компании",navNews:"Новости",
+ navGames:"Игры",navCharity:"Благотворительность",navContact:"Контакты",
+ eyebrow:"НОВОЕ ПОКОЛЕНИЕ ЦИФРОВЫХ ИДЕЙ",
+ heroText:"AURA STAR — пространство технологий, творчества, игр и новых возможностей. Мы создаём проекты, которые открывают двери в будущее.",
+ explore:"О компании",discoverGames:"Наши игры",
+ stat1:"Безграничные возможности",stat2:"Новая глава",stat3:"Год основания проекта",
+ aboutEyebrow:"НАША ИДЕЯ",aboutTitle:"Больше, чем просто компания",
+ aboutText:"AURA STAR — развивающийся цифровой проект, объединяющий технологии, разработку игр, творчество и инновационные идеи. Наша цель — создать собственную экосистему продуктов и сервисов.",
+ aboutText2:"Мы хотим развивать разные направления: от цифровых развлечений до полезных инициатив. Каждый новый проект становится частью большой истории AURA STAR.",
+ newsEyebrow:"БУДЬ В КУРСЕ",newsTitle:"Новости и события",
+ newsDesc:"Следи за развитием AURA STAR. Здесь будут появляться обновления, объявления и информация о новых проектах.",
+ newsLabel:"НОВОСТИ ПРОЕКТА",news1Title:"Развитие AURA STAR",
+ news1Text:"Мы работаем над расширением проекта, его дизайном и будущими возможностями.",
+ news2Title:"Новые игровые идеи",
+ news2Text:"В разработке находятся концепции будущих игр и цифровых развлечений.",
+ news3Title:"Новые направления",
+ news3Text:"Мы планируем развивать новые сервисы, инструменты и творческие проекты.",
+ newsTag:"Обновление",
+ gamesEyebrow:"МИР РАЗВЛЕЧЕНИЙ",gamesTitle:"Игры AURA STAR",
+ gamesDesc:"Игровое направление станет важной частью нашей экосистемы. Здесь будут представлены собственные игровые проекты.",
+ game1Title:"AURA Universe",game1Text:"Исследуй необычные миры, открывай новые места и создавай собственную историю.",
+ game2Title:"Star Legends",game2Text:"Погрузись в фантастическую вселенную, полную приключений и загадок.",
+ game3Title:"AURA Racing",game3Text:"Соревнуйся, открывай новые трассы и проверяй свои навыки.",
+ comingSoon:"Скоро",
+ charityEyebrow:"ДЕЛАЕМ МИР ЛУЧШЕ",charityTitle:"Благотворительность",
+ charityText:"AURA STAR хочет поддерживать добрые инициативы и проекты, которые помогают людям и делают общество лучше.",
+ charityText2:"В будущем здесь появится информация о благотворительных программах, партнёрствах и возможностях участия. Все инициативы будут публиковаться с прозрачным описанием.",
+ contactEyebrow:"СВЯЖИСЬ С НАМИ",contactTitle:"Давай создавать будущее вместе",
+ contactText:"Есть идея, предложение или вопрос? Мы будем рады обратной связи.",
+ contactButton:"Написать нам",footerText:"Создаём будущее вместе."
+},
+en:{
+ navHome:"Home",navAbout:"About",navNews:"News",navGames:"Games",navCharity:"Charity",navContact:"Contact",
+ eyebrow:"A NEW GENERATION OF DIGITAL IDEAS",
+ heroText:"AURA STAR is a space for technology, creativity, games and new opportunities. We create projects that open doors to the future.",
+ explore:"About us",discoverGames:"Our games",
+ stat1:"Unlimited possibilities",stat2:"A new chapter",stat3:"Project launch year",
+ aboutEyebrow:"OUR IDEA",aboutTitle:"More than just a company",
+ aboutText:"AURA STAR is a growing digital project that brings together technology, game development, creativity and innovative ideas. Our goal is to build our own ecosystem of products and services.",
+ aboutText2:"We aim to develop different areas, from digital entertainment to meaningful initiatives. Every new project becomes part of the AURA STAR story.",
+ newsEyebrow:"STAY UPDATED",newsTitle:"News and events",
+ newsDesc:"Follow the growth of AURA STAR. Updates, announcements and information about new projects will appear here.",
+ newsLabel:"PROJECT NEWS",news1Title:"Growing AURA STAR",
+ news1Text:"We are working on expanding the project, its design and future possibilities.",
+ news2Title:"New gaming ideas",news2Text:"Concepts for future games and digital entertainment are in development.",
+ news3Title:"New directions",news3Text:"We plan to develop new services, tools and creative projects.",
+ newsTag:"Update",
+ gamesEyebrow:"A WORLD OF ENTERTAINMENT",gamesTitle:"AURA STAR Games",
+ gamesDesc:"Gaming will become an important part of our ecosystem. Our own game projects will be presented here.",
+ game1Title:"AURA Universe",game1Text:"Explore unusual worlds, discover new places and create your own story.",
+ game2Title:"Star Legends",game2Text:"Enter a fantasy universe full of adventures and mysteries.",
+ game3Title:"AURA Racing",game3Text:"Compete, discover new tracks and test your skills.",
+ comingSoon:"Coming soon",
+ charityEyebrow:"MAKING THE WORLD BETTER",charityTitle:"Charity",
+ charityText:"AURA STAR wants to support positive initiatives and projects that help people and make society better.",
+ charityText2:"Information about charity programmes, partnerships and ways to participate will appear here in the future. Every initiative will be described transparently.",
+ contactEyebrow:"GET IN TOUCH",contactTitle:"Let's build the future together",
+ contactText:"Have an idea, suggestion or question? We would love to hear from you.",
+ contactButton:"Contact us",footerText:"Building the future together."
+},
+zh:{
+ navHome:"首页",navAbout:"关于我们",navNews:"新闻",navGames:"游戏",navCharity:"慈善",navContact:"联系方式",
+ eyebrow:"新一代数字创意",
+ heroText:"AURA STAR 是一个融合科技、创意、游戏与机遇的空间。我们创造开启未来大门的项目。",
+ explore:"关于我们",discoverGames:"我们的游戏",
+ stat1:"无限可能",stat2:"新的篇章",stat3:"项目启动年份",
+ aboutEyebrow:"我们的理念",aboutTitle:"不只是一家公司",
+ aboutText:"AURA STAR 是一个不断发展的数字项目，融合科技、游戏开发、创意与创新理念。我们的目标是建立自己的产品和服务生态系统。",
+ aboutText2:"我们希望发展数字娱乐和有意义的社会项目。每一个新项目都是 AURA STAR 故事的一部分。",
+ newsEyebrow:"最新动态",newsTitle:"新闻与活动",
+ newsDesc:"关注 AURA STAR 的发展。更新、公告和新项目资讯将在这里发布。",
+ newsLabel:"项目新闻",news1Title:"AURA STAR 的发展",
+ news1Text:"我们正在完善项目、设计和未来功能。",
+ news2Title:"新的游戏创意",news2Text:"未来游戏和数字娱乐的概念正在开发中。",
+ news3Title:"新的发展方向",news3Text:"我们计划开发新的服务、工具和创意项目。",
+ newsTag:"更新",
+ gamesEyebrow:"娱乐世界",gamesTitle:"AURA STAR 游戏",
+ gamesDesc:"游戏将成为我们生态系统的重要组成部分。这里将展示我们自己的游戏项目。",
+ game1Title:"AURA Universe",game1Text:"探索不同的世界，发现新地点，创造自己的故事。",
+ game2Title:"Star Legends",game2Text:"进入充满冒险和谜题的幻想宇宙。",
+ game3Title:"AURA Racing",game3Text:"参与比赛，探索新赛道，测试你的技能。",
+ comingSoon:"即将推出",
+ charityEyebrow:"让世界更美好",charityTitle:"慈善事业",
+ charityText:"AURA STAR 希望支持帮助他人、改善社会的积极倡议和项目。",
+ charityText2:"未来这里将介绍慈善计划、合作伙伴关系和参与方式。每项活动都将透明地介绍。",
+ contactEyebrow:"联系我们",contactTitle:"一起创造未来",
+ contactText:"有想法、建议或问题吗？欢迎与我们联系。",
+ contactButton:"联系我们",footerText:"共同创造未来。"
+},
+es:{
+ navHome:"Inicio",navAbout:"Nosotros",navNews:"Noticias",navGames:"Juegos",navCharity:"Caridad",navContact:"Contacto",
+ eyebrow:"UNA NUEVA GENERACIÓN DE IDEAS DIGITALES",
+ heroText:"AURA STAR es un espacio de tecnología, creatividad, juegos y nuevas oportunidades. Creamos proyectos que abren las puertas al futuro.",
+ explore:"Sobre nosotros",discoverGames:"Nuestros juegos",
+ stat1:"Posibilidades ilimitadas",stat2:"Un nuevo capítulo",stat3:"Año de inicio",
+ aboutEyebrow:"NUESTRA IDEA",aboutTitle:"Más que una empresa",
+ aboutText:"AURA STAR es un proyecto digital en crecimiento que reúne tecnología, desarrollo de juegos, creatividad e ideas innovadoras. Nuestro objetivo es crear nuestro propio ecosistema de productos y servicios.",
+ aboutText2:"Queremos desarrollar distintas áreas, desde el entretenimiento digital hasta iniciativas positivas. Cada proyecto forma parte de la historia de AURA STAR.",
+ newsEyebrow:"NOVEDADES",newsTitle:"Noticias y eventos",
+ newsDesc:"Sigue el crecimiento de AURA STAR. Aquí aparecerán actualizaciones, anuncios e información sobre nuevos proyectos.",
+ newsLabel:"NOTICIAS DEL PROYECTO",news1Title:"El crecimiento de AURA STAR",
+ news1Text:"Estamos ampliando el proyecto, su diseño y sus posibilidades futuras.",
+ news2Title:"Nuevas ideas de juegos",news2Text:"Estamos desarrollando conceptos para futuros juegos y entretenimiento digital.",
+ news3Title:"Nuevas direcciones",news3Text:"Planeamos desarrollar nuevos servicios, herramientas y proyectos creativos.",
+ newsTag:"Actualización",
+ gamesEyebrow:"UN MUNDO DE ENTRETENIMIENTO",gamesTitle:"Juegos de AURA STAR",
+ gamesDesc:"Los juegos serán una parte importante de nuestro ecosistema. Aquí se presentarán nuestros propios proyectos.",
+ game1Title:"AURA Universe",game1Text:"Explora mundos diferentes, descubre lugares y crea tu propia historia.",
+ game2Title:"Star Legends",game2Text:"Entra en un universo fantástico lleno de aventuras y misterios.",
+ game3Title:"AURA Racing",game3Text:"Compite, descubre circuitos y pon a prueba tus habilidades.",
+ comingSoon:"Próximamente",
+ charityEyebrow:"HACEMOS UN MUNDO MEJOR",charityTitle:"Caridad",
+ charityText:"AURA STAR quiere apoyar iniciativas positivas y proyectos que ayuden a las personas y mejoren la sociedad.",
+ charityText2:"En el futuro publicaremos información sobre programas solidarios, colaboraciones y formas de participar.",
+ contactEyebrow:"CONTÁCTANOS",contactTitle:"Construyamos el futuro juntos",
+ contactText:"¿Tienes una idea, propuesta o pregunta? Nos encantará escucharte.",
+ contactButton:"Escríbenos",footerText:"Construyendo juntos el futuro."
+},
+de:{
+ navHome:"Startseite",navAbout:"Über uns",navNews:"Neuigkeiten",navGames:"Spiele",navCharity:"Wohltätigkeit",navContact:"Kontakt",
+ eyebrow:"EINE NEUE GENERATION DIGITALER IDEEN",
+ heroText:"AURA STAR ist ein Ort für Technologie, Kreativität, Spiele und neue Möglichkeiten. Wir entwickeln Projekte, die Türen zur Zukunft öffnen.",
+ explore:"Über uns",discoverGames:"Unsere Spiele",
+ stat1:"Unbegrenzte Möglichkeiten",stat2:"Ein neues Kapitel",stat3:"Projektstart",
+ aboutEyebrow:"UNSERE IDEE",aboutTitle:"Mehr als nur ein Unternehmen",
+ aboutText:"AURA STAR ist ein wachsendes digitales Projekt, das Technologie, Spieleentwicklung, Kreativität und innovative Ideen verbindet. Unser Ziel ist ein eigenes Ökosystem aus Produkten und Dienstleistungen.",
+ aboutText2:"Wir möchten verschiedene Bereiche entwickeln, von digitaler Unterhaltung bis hin zu sinnvollen Initiativen. Jedes Projekt wird Teil der AURA-STAR-Geschichte.",
+ newsEyebrow:"BLEIB INFORMIERT",newsTitle:"Neuigkeiten und Ereignisse",
+ newsDesc:"Verfolge die Entwicklung von AURA STAR. Hier erscheinen Updates, Ankündigungen und Informationen zu neuen Projekten.",
+ newsLabel:"PROJEKTNEWS",news1Title:"AURA STAR wächst",
+ news1Text:"Wir arbeiten an der Erweiterung des Projekts, seinem Design und zukünftigen Möglichkeiten.",
+ news2Title:"Neue Spielideen",news2Text:"Konzepte für zukünftige Spiele und digitale Unterhaltung werden entwickelt.",
+ news3Title:"Neue Bereiche",news3Text:"Wir planen neue Dienste, Werkzeuge und kreative Projekte.",
+ newsTag:"Aktualisierung",
+ gamesEyebrow:"WELT DER UNTERHALTUNG",gamesTitle:"AURA STAR Spiele",
+ gamesDesc:"Spiele werden ein wichtiger Teil unseres Ökosystems. Hier stellen wir unsere eigenen Spieleprojekte vor.",
+ game1Title:"AURA Universe",game1Text:"Erkunde ungewöhnliche Welten, entdecke neue Orte und schreibe deine eigene Geschichte.",
+ game2Title:"Star Legends",game2Text:"Tauche ein in ein Fantasy-Universum voller Abenteuer und Geheimnisse.",
+ game3Title:"AURA Racing",game3Text:"Tritt an, entdecke neue Strecken und teste deine Fähigkeiten.",
+ comingSoon:"Demnächst",
+ charityEyebrow:"DIE WELT VERBESSERN",charityTitle:"Wohltätigkeit",
+ charityText:"AURA STAR möchte positive Initiativen und Projekte unterstützen, die Menschen helfen und die Gesellschaft verbessern.",
+ charityText2:"Informationen über Hilfsprogramme, Partnerschaften und Möglichkeiten zur Teilnahme werden hier künftig veröffentlicht.",
+ contactEyebrow:"KONTAKT",contactTitle:"Lass uns gemeinsam die Zukunft gestalten",
+ contactText:"Hast du eine Idee, einen Vorschlag oder eine Frage? Wir freuen uns auf deine Nachricht.",
+ contactButton:"Schreib uns",footerText:"Gemeinsam die Zukunft gestalten."
+},
+fr:{
+ navHome:"Accueil",navAbout:"À propos",navNews:"Actualités",navGames:"Jeux",navCharity:"Solidarité",navContact:"Contact",
+ eyebrow:"UNE NOUVELLE GÉNÉRATION D'IDÉES NUMÉRIQUES",
+ heroText:"AURA STAR est un espace dédié à la technologie, à la créativité, aux jeux et aux nouvelles possibilités. Nous créons des projets qui ouvrent les portes de l'avenir.",
+ explore:"À propos",discoverGames:"Nos jeux",
+ stat1:"Possibilités illimitées",stat2:"Un nouveau chapitre",stat3:"Année de lancement",
+ aboutEyebrow:"NOTRE IDÉE",aboutTitle:"Bien plus qu'une entreprise",
+ aboutText:"AURA STAR est un projet numérique en développement qui rassemble technologie, création de jeux, créativité et idées innovantes. Notre objectif est de créer notre propre écosystème de produits et services.",
+ aboutText2:"Nous souhaitons développer différents domaines, du divertissement numérique aux initiatives positives. Chaque projet fait partie de l'histoire d'AURA STAR.",
+ newsEyebrow:"RESTEZ INFORMÉ",newsTitle:"Actualités et événements",
+ newsDesc:"Suivez le développement d'AURA STAR. Les nouveautés et annonces seront publiées ici.",
+ newsLabel:"ACTUALITÉS DU PROJET",news1Title:"Le développement d'AURA STAR",
+ news1Text:"Nous travaillons à l'évolution du projet, de son design et de ses possibilités.",
+ news2Title:"Nouvelles idées de jeux",news2Text:"Des concepts de futurs jeux et divertissements numériques sont en préparation.",
+ news3Title:"Nouvelles directions",news3Text:"Nous prévoyons de développer de nouveaux services, outils et projets créatifs.",
+ newsTag:"Mise à jour",
+ gamesEyebrow:"UN MONDE DE DIVERTISSEMENT",gamesTitle:"Les jeux AURA STAR",
+ gamesDesc:"Le jeu sera une partie importante de notre écosystème. Nos propres projets seront présentés ici.",
+ game1Title:"AURA Universe",game1Text:"Explore des mondes étonnants, découvre de nouveaux lieux et crée ton histoire.",
+ game2Title:"Star Legends",game2Text:"Entre dans un univers fantastique rempli d'aventures et de mystères.",
+ game3Title:"AURA Racing",game3Text:"Participe aux courses, découvre des circuits et teste tes compétences.",
+ comingSoon:"Bientôt",
+ charityEyebrow:"RENDRE LE MONDE MEILLEUR",charityTitle:"Solidarité",
+ charityText:"AURA STAR souhaite soutenir des initiatives positives et des projets qui aident les personnes et améliorent la société.",
+ charityText2:"Des informations sur les programmes solidaires, les partenariats et les moyens de participer seront publiées ici.",
+ contactEyebrow:"CONTACTEZ-NOUS",contactTitle:"Construisons l'avenir ensemble",
+ contactText:"Une idée, une proposition ou une question ? Nous serons ravis de vous lire.",
+ contactButton:"Nous écrire",footerText:"Construire l'avenir ensemble."
+},
+ar:{
+ navHome:"الرئيسية",navAbout:"من نحن",navNews:"الأخبار",navGames:"الألعاب",navCharity:"الأعمال الخيرية",navContact:"اتصل بنا",
+ eyebrow:"جيل جديد من الأفكار الرقمية",
+ heroText:"AURA STAR مساحة للتكنولوجيا والإبداع والألعاب والفرص الجديدة. نصنع مشاريع تفتح أبواب المستقبل.",
+ explore:"من نحن",discoverGames:"ألعابنا",
+ stat1:"إمكانيات بلا حدود",stat2:"فصل جديد",stat3:"سنة انطلاق المشروع",
+ aboutEyebrow:"فكرتنا",aboutTitle:"أكثر من مجرد شركة",
+ aboutText:"AURA STAR مشروع رقمي متنامٍ يجمع التكنولوجيا وتطوير الألعاب والإبداع والأفكار المبتكرة. هدفنا بناء منظومة خاصة من المنتجات والخدمات.",
+ aboutText2:"نطمح إلى تطوير مجالات مختلفة، من الترفيه الرقمي إلى المبادرات المفيدة. كل مشروع جديد يصبح جزءاً من قصة AURA STAR.",
+ newsEyebrow:"تابع الجديد",newsTitle:"الأخبار والفعاليات",
+ newsDesc:"تابع تطور AURA STAR. ستظهر هنا التحديثات والإعلانات ومعلومات المشاريع الجديدة.",
+ newsLabel:"أخبار المشروع",news1Title:"تطوير AURA STAR",
+ news1Text:"نعمل على توسيع المشروع وتحسين تصميمه وإمكاناته المستقبلية.",
+ news2Title:"أفكار ألعاب جديدة",news2Text:"نعمل على تطوير أفكار لألعاب وترفيه رقمي في المستقبل.",
+ news3Title:"مجالات جديدة",news3Text:"نخطط لتطوير خدمات وأدوات ومشاريع إبداعية جديدة.",
+ newsTag:"تحديث",
+ gamesEyebrow:"عالم الترفيه",gamesTitle:"ألعاب AURA STAR",
+ gamesDesc:"ستصبح الألعاب جزءاً مهماً من منظومتنا. ستُعرض هنا مشاريع الألعاب الخاصة بنا.",
+ game1Title:"AURA Universe",game1Text:"استكشف عوالم مختلفة واكتشف أماكن جديدة واصنع قصتك.",
+ game2Title:"Star Legends",game2Text:"ادخل عالماً خيالياً مليئاً بالمغامرات والأسرار.",
+ game3Title:"AURA Racing",game3Text:"تنافس واكتشف مسارات جديدة واختبر مهاراتك.",
+ comingSoon:"قريباً",
+ charityEyebrow:"لنجعل العالم أفضل",charityTitle:"الأعمال الخيرية",
+ charityText:"تطمح AURA STAR إلى دعم المبادرات الإيجابية والمشاريع التي تساعد الناس وتحسن المجتمع.",
+ charityText2:"ستظهر هنا مستقبلاً معلومات عن البرامج الخيرية والشراكات وطرق المشاركة.",
+ contactEyebrow:"تواصل معنا",contactTitle:"لنبنِ المستقبل معاً",
+ contactText:"هل لديك فكرة أو اقتراح أو سؤال؟ يسعدنا سماع رأيك.",
+ contactButton:"راسلنا",footerText:"نبني المستقبل معاً."
+},
+ja:{
+ navHome:"ホーム",navAbout:"会社概要",navNews:"ニュース",navGames:"ゲーム",navCharity:"慈善活動",navContact:"お問い合わせ",
+ eyebrow:"デジタルアイデアの新しい世代",
+ heroText:"AURA STARは、テクノロジー、創造性、ゲーム、新しい可能性のための空間です。未来への扉を開くプロジェクトを創造します。",
+ explore:"会社概要",discoverGames:"ゲームを見る",
+ stat1:"無限の可能性",stat2:"新しい章",stat3:"プロジェクト開始年",
+ aboutEyebrow:"私たちの理念",aboutTitle:"単なる会社ではありません",
+ aboutText:"AURA STARは、テクノロジー、ゲーム開発、創造性、革新的なアイデアを組み合わせた成長中のデジタルプロジェクトです。独自の製品とサービスのエコシステムを目指しています。",
+ aboutText2:"デジタルエンターテインメントから社会に役立つ活動まで、さまざまな分野を発展させます。",
+ newsEyebrow:"最新情報",newsTitle:"ニュースとイベント",
+ newsDesc:"AURA STARの成長をチェックしてください。更新情報や新しいプロジェクトのお知らせを掲載します。",
+ newsLabel:"プロジェクトニュース",news1Title:"AURA STARの成長",
+ news1Text:"プロジェクトの拡大、デザイン、将来の機能に取り組んでいます。",
+ news2Title:"新しいゲームのアイデア",news2Text:"未来のゲームとデジタルエンターテインメントの構想を開発中です。",
+ news3Title:"新しい分野",news3Text:"新しいサービス、ツール、創造的なプロジェクトを計画しています。",
+ newsTag:"更新",
+ gamesEyebrow:"エンターテインメントの世界",gamesTitle:"AURA STARのゲーム",
+ gamesDesc:"ゲームは私たちのエコシステムの重要な一部になります。独自のゲームをここで紹介します。",
+ game1Title:"AURA Universe",game1Text:"不思議な世界を探索し、新しい場所を発見して、自分の物語を作りましょう。",
+ game2Title:"Star Legends",game2Text:"冒険と謎に満ちたファンタジーの世界へ。",
+ game3Title:"AURA Racing",game3Text:"競争し、新しいコースを発見し、スキルを試しましょう。",
+ comingSoon:"近日公開",
+ charityEyebrow:"世界をより良く",charityTitle:"慈善活動",
+ charityText:"AURA STARは、人々を助け、社会をより良くする前向きな活動やプロジェクトを支援したいと考えています。",
+ charityText2:"今後、慈善プログラム、パートナーシップ、参加方法について紹介します。",
+ contactEyebrow:"お問い合わせ",contactTitle:"一緒に未来を作りましょう",
+ contactText:"アイデアや提案、質問がありますか？ぜひご連絡ください。",
+ contactButton:"メールを送る",footerText:"一緒に未来を創造します。"
+},
+pt:{
+ navHome:"Início",navAbout:"Sobre",navNews:"Notícias",navGames:"Jogos",navCharity:"Caridade",navContact:"Contato",
+ eyebrow:"UMA NOVA GERAÇÃO DE IDEIAS DIGITAIS",
+ heroText:"AURA STAR é um espaço para tecnologia, criatividade, jogos e novas oportunidades. Criamos projetos que abrem as portas para o futuro.",
+ explore:"Sobre nós",discoverGames:"Nossos jogos",
+ stat1:"Possibilidades ilimitadas",stat2:"Um novo capítulo",stat3:"Ano de lançamento",
+ aboutEyebrow:"NOSSA IDEIA",aboutTitle:"Mais do que uma empresa",
+ aboutText:"AURA STAR é um projeto digital em crescimento que reúne tecnologia, desenvolvimento de jogos, criatividade e ideias inovadoras. Nosso objetivo é criar um ecossistema próprio de produtos e serviços.",
+ aboutText2:"Queremos desenvolver diferentes áreas, do entretenimento digital a iniciativas positivas. Cada projeto faz parte da história da AURA STAR.",
+ newsEyebrow:"FIQUE ATUALIZADO",newsTitle:"Notícias e eventos",
+ newsDesc:"Acompanhe o crescimento da AURA STAR. Atualizações, anúncios e informações sobre novos projetos estarão aqui.",
+ newsLabel:"NOTÍCIAS DO PROJETO",news1Title:"O crescimento da AURA STAR",
+ news1Text:"Estamos trabalhando na expansão do projeto, no design e nas possibilidades futuras.",
+ news2Title:"Novas ideias de jogos",news2Text:"Estamos desenvolvendo conceitos para futuros jogos e entretenimento digital.",
+ news3Title:"Novas direções",news3Text:"Planejamos desenvolver novos serviços, ferramentas e projetos criativos.",
+ newsTag:"Atualização",
+ gamesEyebrow:"MUNDO DO ENTRETENIMENTO",gamesTitle:"Jogos AURA STAR",
+ gamesDesc:"Os jogos serão uma parte importante do nosso ecossistema. Nossos projetos serão apresentados aqui.",
+ game1Title:"AURA Universe",game1Text:"Explore mundos diferentes, descubra lugares e crie sua própria história.",
+ game2Title:"Star Legends",game2Text:"Entre em um universo de fantasia cheio de aventuras e mistérios.",
+ game3Title:"AURA Racing",game3Text:"Compita, descubra pistas e teste suas habilidades.",
+ comingSoon:"Em breve",
+ charityEyebrow:"TORNANDO O MUNDO MELHOR",charityTitle:"Caridade",
+ charityText:"AURA STAR deseja apoiar iniciativas positivas e projetos que ajudem as pessoas e melhorem a sociedade.",
+ charityText2:"No futuro, publicaremos informações sobre programas solidários, parcerias e formas de participação.",
+ contactEyebrow:"FALE CONOSCO",contactTitle:"Vamos construir o futuro juntos",
+ contactText:"Tem uma ideia, sugestão ou pergunta? Adoraríamos ouvir você.",
+ contactButton:"Enviar mensagem",footerText:"Construindo o futuro juntos."
+},
+it:{
+ navHome:"Home",navAbout:"Chi siamo",navNews:"Notizie",navGames:"Giochi",navCharity:"Beneficenza",navContact:"Contatti",
+ eyebrow:"UNA NUOVA GENERAZIONE DI IDEE DIGITALI",
+ heroText:"AURA STAR è uno spazio dedicato alla tecnologia, alla creatività, ai giochi e alle nuove opportunità. Creiamo progetti che aprono le porte al futuro.",
+ explore:"Chi siamo",discoverGames:"I nostri giochi",
+ stat1:"Possibilità illimitate",stat2:"Un nuovo capitolo",stat3:"Anno di lancio",
+ aboutEyebrow:"LA NOSTRA IDEA",aboutTitle:"Più di una semplice azienda",
+ aboutText:"AURA STAR è un progetto digitale in crescita che unisce tecnologia, sviluppo di giochi, creatività e idee innovative. Il nostro obiettivo è creare un ecosistema di prodotti e servizi.",
+ aboutText2:"Vogliamo sviluppare diversi settori, dall'intrattenimento digitale alle iniziative positive. Ogni progetto diventa parte della storia di AURA STAR.",
+ newsEyebrow:"RESTA AGGIORNATO",newsTitle:"Notizie ed eventi",
+ newsDesc:"Segui la crescita di AURA STAR. Qui appariranno aggiornamenti, annunci e informazioni sui nuovi progetti.",
+ newsLabel:"NOTIZIE DEL PROGETTO",news1Title:"La crescita di AURA STAR",
+ news1Text:"Stiamo lavorando all'espansione del progetto, al design e alle possibilità future.",
+ news2Title:"Nuove idee di gioco",news2Text:"Stiamo sviluppando idee per futuri giochi e intrattenimento digitale.",
+ news3Title:"Nuove direzioni",news3Text:"Pianifichiamo nuovi servizi, strumenti e progetti creativi.",
+ newsTag:"Aggiornamento",
+ gamesEyebrow:"MONDO DELL'INTRATTENIMENTO",gamesTitle:"Giochi AURA STAR",
+ gamesDesc:"I giochi diventeranno una parte importante del nostro ecosistema. Qui presenteremo i nostri progetti.",
+ game1Title:"AURA Universe",game1Text:"Esplora mondi insoliti, scopri nuovi luoghi e crea la tua storia.",
+ game2Title:"Star Legends",game2Text:"Entra in un universo fantastico pieno di avventure e misteri.",
+ game3Title:"AURA Racing",game3Text:"Competi, scopri nuovi circuiti e metti alla prova le tue abilità.",
+ comingSoon:"Prossimamente",
+ charityEyebrow:"RENDIAMO IL MONDO MIGLIORE",charityTitle:"Beneficenza",
+ charityText:"AURA STAR vuole sostenere iniziative positive e progetti che aiutano le persone e migliorano la società.",
+ charityText2:"In futuro pubblicheremo informazioni sui programmi di beneficenza, sulle collaborazioni e sulle modalità di partecipazione.",
+ contactEyebrow:"CONTATTACI",contactTitle:"Costruiamo insieme il futuro",
+ contactText:"Hai un'idea, un suggerimento o una domanda? Saremo felici di ascoltarti.",
+ contactButton:"Scrivici",footerText:"Costruiamo insieme il futuro."
+}
+};
+
+/* LANGUAGE SYSTEM */
+const languageSelect=document.getElementById("language");
+
+function changeLanguage(lang){
+ const dict=translations[lang] || translations.ru;
+
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.body.classList.toggle("rtl",lang==="ar");
+
+ document.querySelectorAll("[data-t]").forEach(element=>{
+  const key=element.dataset.t;
+  element.textContent=dict[key] ?? translations.en[key] ?? "";
+ });
+
+ languageSelect.value=lang;
+ try{localStorage.setItem("aura-language",lang)}catch(e){}
+}
+
+languageSelect.addEventListener("change",()=>{
+ changeLanguage(languageSelect.value);
+});
+
+/* MENU SYSTEM */
+const menu=document.getElementById("mobileMenu");
+const menuBtn=document.getElementById("menuBtn");
+const closeBtn=document.getElementById("closeMenu");
+
+function closeMenu(){
+ menu.classList.remove("open");
+ menuBtn.setAttribute("aria-expanded","false");
+}
+
+function openMenu(){
+ menu.classList.add("open");
+ menuBtn.setAttribute("aria-expanded","true");
+}
+
+menuBtn.addEventListener("click",()=>{
+ if(menu.classList.contains("open"))closeMenu();
+ else openMenu();
+});
+
+closeBtn.addEventListener("click",closeMenu);
+
+/* Automatically close after choosing a section */
+document.querySelectorAll(".mobile-menu a").forEach(link=>{
+ link.addEventListener("click",closeMenu);
+});
+
+/* Close when tapping outside the menu */
+document.addEventListener("click",event=>{
+ if(!menu.contains(event.target)&&
+    !menuBtn.contains(event.target)){
+  closeMenu();
+ }
+});
+
+/* Close with Escape */
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape")closeMenu();
+});
+
+/* Close when scrolling */
+window.addEventListener("scroll",()=>{
+ if(menu.classList.contains("open"))closeMenu();
+},{passive:true});
+
+/* Close when changing to desktop layout */
+window.addEventListener("resize",()=>{
+ if(window.innerWidth>900)closeMenu();
+});
+
+/* INITIAL LANGUAGE */
+let savedLanguage="ru";
+try{
+ savedLanguage=localStorage.getItem("aura-language")||"ru";
+}catch(e){}
+changeLanguage(translations[savedLanguage]?savedLanguage:"ru");
+</script>
+
+
+</body>
+</html>
+
